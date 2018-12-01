@@ -1,24 +1,27 @@
 <template>
   <div id="app">
-    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/vue-post-photo.jpg" class="main-photo">
-    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/vue-main-profile.jpg" class="main-profile">
+    <img
+      src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/vue-post-photo.jpg"
+      class="main-photo"
+    >
+    <img
+      src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/vue-main-profile.jpg"
+      class="main-profile"
+    >
     <div class="main-info">
-      <span class="name">Julianne Delfina</span> 
+      <span class="name">Julianne Delfina</span>
       <h3>"It's lovely after it rains"</h3>
     </div>
     <hr>
     <ul>
       <li
         is="individual-comment"
-        v-for="comment in comments"
+        v-for="(comment, index) in comments"
+        :key="index"
         v-bind:commentpost="comment"
       ></li>
     </ul>
-    <input
-      v-model="newComment"
-      v-on:keyup.enter="addComment"
-      placeholder="Add a comment"
-    />
+    <input v-model="newComment" v-on:keyup.enter="addComment" placeholder="Add a comment">
   </div>
 </template>
 
@@ -34,36 +37,40 @@ export default {
     return {
       newComment: '',
       comments: [
-        { 
+        {
           text: 'Looks great Julianne!',
           author: 'Robin Rendle',
-          authorImg: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/v-coffee.jpg'
+          authorImg:
+            'https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/v-coffee.jpg'
         },
-        { 
+        {
           text: 'I love the Sea',
           author: 'Miriam Suzanne',
-          authorImg: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/v-miriam.jpg'
+          authorImg:
+            'https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/v-miriam.jpg'
         },
-        { 
+        {
           text: 'Where are you?',
           author: 'Geoff Graham',
-          authorImg: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/v-geoff.jpg'
+          authorImg:
+            'https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/v-geoff.jpg'
         }
       ]
-    }
+    };
   },
   methods: {
-    addComment: function () {
+    addComment: function() {
       const newCommentObj = {
         text: this.newComment,
         author: 'Magoo',
-        authorImg: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/v-skull.jpg'
+        authorImg:
+          'https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/v-skull.jpg'
       };
       this.comments.push(newCommentObj);
       this.newComment = '';
     }
   }
-}
+};
 </script>
 
 <style>
@@ -115,11 +122,11 @@ h3 {
   padding: 10px 20px;
   text-align: left;
   margin-bottom: 15px;
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
+}
+.main-info:after {
+  content: '';
+  display: table;
+  clear: both;
 }
 
 li {
@@ -159,5 +166,4 @@ input {
 .post-comment {
   margin: 0 0 5px 0;
 }
-
 </style>
